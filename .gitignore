@@ -1,3 +1,7 @@
+# Makefile generated directories
+obj
+out
+
 # Object files
 *.o
 *.ko
