@@ -11,9 +11,9 @@ This repository contains a C language library, under MIT License, that provides 
 * [Jansson library](http://www.digip.org/jansson/)
 
 ##Features and examples
-Almost all [Dropbox Core API](https://www.dropbox.com/developers/core/docs) methods are available with all their arguments. Their JSON answers are translated to C structures.
+Almost all [Dropbox Core API](https://www.dropbox.com/developers/core/docs) methods are available with their arguments. Their JSON answers are translated into C structures.
 
-A example is provided [here](https://github.com/Dwii/Dropbox-C/blob/master/Dropbox/example/example.c). But to shortly illustrate its usage, there's what a call to the [file_put method](https://www.dropbox.com/developers/core/docs#files_put) looks like:
+A example is provided [here](https://github.com/Dwii/Dropbox-C/blob/master/Dropbox/example/example.c). But to briefly illustrate its usage, here is what a call to the [file_put method](https://www.dropbox.com/developers/core/docs#files_put) looks like:
 
 ```
   FILE *file = fopen("/tmp/hello.txt", "r"); 
