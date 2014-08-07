@@ -2,7 +2,7 @@
 
 ##Introdution
 
-This repository contains a C language library, under MIT License, that provides access to the Dropbox Core API.
+This repository contains a C language library, under [MIT License](https://github.com/Dwii/Dropbox-C/blob/master/LICENSE), that provides access to the [Dropbox Core API](https://www.dropbox.com/developers/core/docs).
 
 ##Requirements
 
