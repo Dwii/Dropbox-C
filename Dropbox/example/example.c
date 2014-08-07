@@ -63,7 +63,7 @@ int main (int argc, char **argv) {
 	}
 
     // Set default arguments to not repeat them on each API call
-    drbSetDefault(cli, DRBOPT_ROOT, DRBVAL_ROOT_DROPBOX, DRBOPT_END);
+    drbSetDefault(cli, DRBOPT_ROOT, DRBVAL_ROOT_AUTO, DRBOPT_END);
     
     // Read account Informations
     output = NULL;

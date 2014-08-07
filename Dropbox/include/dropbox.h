@@ -22,6 +22,7 @@ extern "C" {
 #define DRBVAL_SIZE_XLARGE "xl"
 #define DRBVAL_ROOT_DROPBOX "dropbox"
 #define DRBVAL_ROOT_SANDBOX "sandbox"
+#define DRBVAL_ROOT_AUTO    "auto"
 #define DRBVAL_IGNORE_BOOL -1
 #define DRBVAL_IGNORE_STR  NULL
 #define DRBVAL_IGNORE_INT  -1
