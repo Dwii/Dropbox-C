@@ -20,12 +20,12 @@ typedef union {
 } drbOptArg;
 
 /*!
- * \struct	drbClient
- * \breif	Client data used the whole time.
+ * \struct  drbClient
+ * \breif   Client data used the whole time.
  */
 struct drbClient{
-	drbOAuthToken c; 
-	drbOAuthToken t;
+    drbOAuthToken c;
+    drbOAuthToken t;
     drbOptArg defaultOptions[DRBOPT_END];
 };
 
@@ -34,8 +34,8 @@ int drbOAuthPost(drbClient* cli, const char* url, void* data, void* writeFct, in
 
 int drbOAuthGetFile(drbClient* cli, const char* url, void* data, void* writeFct, char** answer, int timeout);
 int drbOAuthPostFile(drbClient* cli, const char *url, void* data,
-					 ssize_t (*readFct)(void *, size_t , size_t , void *),
-					 char** answer, int timeout);
+                     ssize_t (*readFct)(void *, size_t , size_t , void *),
+                     char** answer, int timeout);
 char *drbEncodePath(const char *string);
 bool drbParseOauthTokenReply(const char *answer, char **key, char **secret);
 

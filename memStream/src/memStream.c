@@ -16,10 +16,10 @@
 
 
 void* memRealloc(void* ptr, size_t size) {
-	char* newPtr = NULL;
-	if (size > 0 && (newPtr = realloc(ptr, size)) == NULL)
-		free(ptr), ptr = NULL;
-	return newPtr;
+    char* newPtr = NULL;
+    if (size > 0 && (newPtr = realloc(ptr, size)) == NULL)
+        free(ptr), ptr = NULL;
+    return newPtr;
 }
 
 void memStreamInit(memStream *stream) {
@@ -32,16 +32,16 @@ void memStreamCleanup(memStream *stream) {
 }
 
 size_t memStreamWrite(const void *ptr, size_t size, size_t count, memStream *stream) {
-	size_t realSize = size * count;
-	if((stream->data = memRealloc(stream->data, stream->size + realSize + 1)) != NULL){
+    size_t realSize = size * count;
+    if((stream->data = memRealloc(stream->data, stream->size + realSize + 1)) != NULL){
         size_t offset = stream->cursor > stream->size ? stream->size : stream->cursor;
-		memcpy(stream->data + offset, ptr, realSize);
+        memcpy(stream->data + offset, ptr, realSize);
         stream->cursor = offset + realSize;
-		if (stream->cursor > stream->size) stream->size = stream->cursor;
-		stream->data[stream->size] = '\0';
-		return realSize;
-	} else
-		return 0;
+        if (stream->cursor > stream->size) stream->size = stream->cursor;
+        stream->data[stream->size] = '\0';
+        return realSize;
+    } else
+        return 0;
 }
 
 size_t memStreamRead(void *ptr, size_t size, size_t count, memStream *stream) {
@@ -57,27 +57,27 @@ size_t memStreamRead(void *ptr, size_t size, size_t count, memStream *stream) {
         }
     } else
         realSize = 0;
-        
-	return realSize;
+    
+    return realSize;
 }
 
 /*
- * @ any code reviewer (like myself): dont replace the code with a memStreamPipe 
+ * @ any code reviewer (like myself): dont replace the code with a memStreamPipe
  * call, code is optimized here to reduce memory reallocation (realloc calls).
  */
 bool memStreamLoad(memStream* stream, void* data, size_t (*xread)(void *, size_t , size_t , void*)) {
     char buffer[MEM_BUFFER_SIZE];
-	size_t len, allocSize = 0;
+    size_t len, allocSize = 0;
     
     while ((len = xread(buffer, sizeof(char), MEM_BUFFER_SIZE, data)) > 0) {
-		stream->size += len;
-		if (stream->size > allocSize) {
-			allocSize = stream->size * 2;
-			if ((stream->data = memRealloc(stream->data, allocSize)) == NULL)
-				break;
-		}
-		memcpy(stream->data + stream->size - len, buffer, len);
-	}
+        stream->size += len;
+        if (stream->size > allocSize) {
+            allocSize = stream->size * 2;
+            if ((stream->data = memRealloc(stream->data, allocSize)) == NULL)
+                break;
+        }
+        memcpy(stream->data + stream->size - len, buffer, len);
+    }
     // is memory still allocated and then shrinked with success ?
     return stream->data && (stream->data = memRealloc(stream->data, stream->size)) != NULL;
 }
@@ -93,7 +93,7 @@ bool memStreamPipe(void* in,  size_t (*xread)(void*, size_t ,size_t ,void*),
         
         if (rLen)         // flush fail when there's still memory to read or
             return false; // on write overflow (wLen > rLen -> xwrite bug!)
-	}
+    }
     return true;
 }
 

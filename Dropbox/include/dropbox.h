@@ -30,16 +30,16 @@ extern "C" {
 #define DRBVAL_IGNORE_PTR  NULL
 
 /*!
- * \struct	drbClient
- * \breif	Dropbox client.
+ * \struct  drbClient
+ * \breif   Dropbox client.
  *
  * Must be freed with drbDestroyClient.
  */
 typedef struct drbClient drbClient;
 
 /*!
- * \struct	drbOAuthToken
- * \breif	OAuth 1.0 Token (credentials).
+ * \struct  drbOAuthToken
+ * \breif   OAuth 1.0 Token (credentials).
  */
 typedef struct {
     char* key;
@@ -48,8 +48,8 @@ typedef struct {
 
 
 /*!
- * \struct	drbAccountInfo
- * \breif	Dropbox account informations.
+ * \struct  drbAccountInfo
+ * \breif   Dropbox account informations.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#account-info for more
@@ -72,8 +72,8 @@ typedef struct {
 } drbAccountInfo;
 
 /*!
- * \struct	drbMetadataList
- * \breif	Dropbox file or folder metadata.
+ * \struct  drbMetadataList
+ * \breif   Dropbox file or folder metadata.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#metadata for more details
@@ -107,8 +107,8 @@ struct drbMetadataList{
 };
 
 /*!
- * \struct	drbLink
- * \breif	Dropbox temporary link to a file.
+ * \struct  drbLink
+ * \breif   Dropbox temporary link to a file.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#shares for more details
@@ -122,8 +122,8 @@ typedef struct {
 } drbLink;
 
 /*!
- * \struct	drbLink
- * \breif	Dropbox file copy reference.
+ * \struct  drbLink
+ * \breif   Dropbox file copy reference.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#copy_ref for more details
@@ -137,8 +137,8 @@ typedef struct {
 } drbCopyRef;
 
 /*!
- * \struct	drbDeltaEntry
- * \breif	Dropbox delta entry.
+ * \struct  drbDeltaEntry
+ * \breif   Dropbox delta entry.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#delta for more details
@@ -150,8 +150,8 @@ typedef struct {
 } drbDeltaEntry;
 
 /*!
- * \struct	drbDelta
- * \breif	Dropbox delta informations.
+ * \struct  drbDelta
+ * \breif   Dropbox delta informations.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#delta for more details
@@ -170,8 +170,8 @@ typedef struct {
 } drbDelta;
 
 /*!
- * \struct	drbDelta
- * \breif	Dropbox delta informations.
+ * \struct  drbDelta
+ * \breif   Dropbox delta informations.
  *
  * Missing fields in the server answer are left blank with NULL value.
  * Check https://www.dropbox.com/developers/core/docs#longpoll-delta for
@@ -248,57 +248,57 @@ enum {
 
 /*!
  * \brief   Sets up the programm environment that dropbox library needs.
- * \return	void
+ * \return  void
  */
 void drbInit();
 
 /*!
  * \brief   Release ressources acquired by drbInit.
- * \return	void
+ * \return  void
  */
 void drbCleanup();
 
 /*!
- * \brief	Create and initilize a drbClient.
- * \param	cKey      consumer key (Client credentials)
- * \param	cSecret   consumer secret (Client credentials)
- * \param	tKey      request or access key (Temporary or Token credentials)
- * \param	tSecret   request or access secret (Temporary or Token credentials)
- * \return	drbClient pointer must be freed with drbDestroyClient by caller
+ * \brief   Create and initilize a drbClient.
+ * \param   cKey      consumer key (Client credentials)
+ * \param   cSecret   consumer secret (Client credentials)
+ * \param   tKey      request or access key (Temporary or Token credentials)
+ * \param   tSecret   request or access secret (Temporary or Token credentials)
+ * \return  drbClient pointer must be freed with drbDestroyClient by caller
  */
 drbClient* drbCreateClient(char* cKey, char* cSecret, char* tKey, char* tSecret);
 
 /*!
- * \brief	Obtain the request token (temporary credentials).
+ * \brief  Obtain the request token (temporary credentials).
  *
  * Achieves the 1st step of OAuth 1.0 protocol by obtaining the temporary creds.
  * The token and its fields lifetime is only guaranteed until the next API
  * function call. If the user code need them afterward, they must be duplicated.
  *
- * \param	cli   client to authorize dropbox access.
- * \return	obtained request token (must NOT be freed or modified by caller).
+ * \param   cli   client to authorize dropbox access.
+ * \return  obtained request token (must NOT be freed or modified by caller).
  */
 drbOAuthToken* drbObtainRequestToken(drbClient* cli);
 
 /*!
- * \brief	Build the url for client accces authorization.
+ * \brief   Build the url for client accces authorization.
  *
  * Build url for 2nd step of OAuth 1.0 protocol (Resource Owner Authorization).
  *
- * \param	cli   client to authorize dropbox access.
- * \return	url to authorize client to acces the user dropbox. Must be freed!
+ * \param   cli   client to authorize dropbox access.
+ * \return  url to authorize client to acces the user dropbox. Must be freed!
  */
 char* drbBuildAuthorizeUrl(drbOAuthToken* reqTok);
 
 /*!
- * \brief	Obtain the access token (Token credentials).
+ * \brief   Obtain the access token (Token credentials).
  *
  * Achieves the last step of OAuth 1.0 protocol by obtaining the token creds.
  * The token and its fields lifetime is only guaranteed until the next API
  * function call. If the user code need them afterward, they must be duplicated.
  *
- * \param	cli   client to authorize dropbox access.
- * \return	obtained access token (must NOT be freed or modified by caller)
+ * \param   cli   client to authorize dropbox access.
+ * \return  obtained access token (must NOT be freed or modified by caller)
  */
 drbOAuthToken* drbObtainAccessToken(drbClient* cli);
     
@@ -310,25 +310,25 @@ drbOAuthToken* drbObtainAccessToken(drbClient* cli);
  *
  * \param   cli   authenticated dropbox client
  * \param   ...   default option/value pairs to set.
- * \return	void
+ * \return  void
  */
 int drbSetDefault(drbClient* cli, ...);
     
 /*!
  * \brief   Get account general informations.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   account informations (drbAccountInfo*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   account informations (drbAccountInfo*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetAccountInfo(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Get a file or folder metadata.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   item metadata (drbMetadata*) or error (char*)
- * \param		...      legal option/value pairs:
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   item metadata (drbMetadata*) or error (char*)
+ * \param       ...      legal option/value pairs:
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_FILE_LIMIT
@@ -337,183 +337,183 @@ int drbGetAccountInfo(drbClient* cli, void** output, ...);
  *                         -# DRBOPT_INCL_DELETED
  *                         -# DRBOPT_REV
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 //int drbGetMetadata(drbClient* cli, drbMetadata** meta, ...);
 int drbGetMetadata(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Download a file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   file metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   file metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_IO_DATA, e.i. FILE*  (required)
  *                         -# DRBOPT_IO_FUNC, e.i. fwrite (required)
  *                         -# DRBOPT_REV
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetFile(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Get a file revisions.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   file revisions list (drbMetadataList*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   file revisions list (drbMetadataList*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_REV_LIMIT
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetRevisions(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Search a file or a folder.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   founded items list (drbMetadataList*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   founded items list (drbMetadataList*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_QUERY
  *                         -# DRBOPT_FILE_LIMIT
  *                         -# DRBOPT_INCL_DELETED
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbSearch(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Download a thumbnail for an image file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   image file metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   image file metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_IO_DATA, e.i. FILE*  (required)
  *                         -# DRBOPT_IO_FUNC, e.i. fwrite (required)
  *                         -# DRBOPT_FORMAT
  *                         -# DRBOPT_SIZE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetThumbnail(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Copy a file or folder.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   new copied item metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   new copied item metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_FROM_PATH (required)
  *                         -# DRBOPT_TO_PATH or DRBOPT_FROM_COPY_REF (required)
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbCopy(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Create a folder.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   created folder metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   created folder metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbCreateFolder(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Delete a file or folder.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   deleted item metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   deleted item metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbDelete(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Move a file or folder.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   moved item metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   moved item metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_FROM_PATH (required)
  *                         -# DRBOPT_TO_PATH or DRBOPT_FROM_COPY_REF (required)
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbMove(drbClient* cli, void** ouput, ...);
 
 /*!
  * \brief   Get changed files and folders.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   delta informations (drbDelta*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   delta informations (drbDelta*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_CURSOR
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetDelta(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Restore a file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   restored file metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   restored file metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_REV  (required)
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbRestore(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Create a dropbox link to a file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   link to the file (drbLink*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   link to the file (drbLink*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_SHORT_URL
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbShare(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Create a direct link to a file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   link to the file (drbLink*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   link to the file (drbLink*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetMedia(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Create a copy reference to a file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   copied file reference (drbCopyRef*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   copied file reference (drbCopyRef*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbGetCopyRef(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Upload a file.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   uploaded file metadata (drbMetadata*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   uploaded file metadata (drbMetadata*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_ROOT (required)
  *                         -# DRBOPT_PATH (required)
  *                         -# DRBOPT_IO_DATA (required)
@@ -521,18 +521,18 @@ int drbGetCopyRef(drbClient* cli, void** output, ...);
  *                         -# DRBOPT_OVERWRITE
  *                         -# DRBOPT_PARENT_REV
  *                         -# DRBOPT_LOCALE
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbPutFile(drbClient* cli, void** output, ...);
 
 /*!
  * \brief   Wait for changes on the account.
- * \param		cli      authenticated dropbox client
- * \param[out]	output   poll result (drbPollDelta*) or error (char*)
- * \param		...      option/value pairs (function arguments) :
+ * \param       cli      authenticated dropbox client
+ * \param[out]  output   poll result (drbPollDelta*) or error (char*)
+ * \param       ...      option/value pairs (function arguments) :
  *                         -# DRBOPT_CURSOR (required)
  *                         -# DRBOPT_TIMEOUT (required)
- * \return	error code (DRBERR_XXX or http error returned by the Dropbox server)
+ * \return  error code (DRBERR_XXX or http error returned by the Dropbox server)
  */
 int drbLongPollDelta(drbClient* cli, void** output, ...);
     
