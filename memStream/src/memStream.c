@@ -82,8 +82,8 @@ bool memStreamLoad(memStream* stream, void* data, size_t (*xread)(void *, size_t
     return stream->data && (stream->data = memRealloc(stream->data, stream->size)) != NULL;
 }
 
-bool memStreamPipe(void* in,  size_t (*xread)(void*, size_t ,size_t ,void*),
-                   void* out, size_t (*xwrite)(void*, size_t ,size_t ,void*)) {
+bool memStreamPipe(void* in,  size_t (*xread)(void*, size_t, size_t, void*),
+                   void* out, size_t (*xwrite)(void*, size_t, size_t, void*)) {
     char buffer[MEM_BUFFER_SIZE];
     size_t rLen, wLen;
     while ((rLen = xread(buffer, sizeof(char), MEM_BUFFER_SIZE, in)) > 0) {

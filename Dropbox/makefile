@@ -29,8 +29,9 @@ example: $(EXAMPLE_PATH)/example
 
 EXPORT_VAR: 
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(LD_LIBRARY_PATH)
+	ldconfig
 
-strip: $(LIBRARY_OUT)
+strip: $(OUT)
 	-strip $^
 
 $(EXAMPLE): $(EXAMPLE_PATH)/example.c
@@ -56,10 +57,10 @@ $(OBJ_PATH) $(OUT_PATH) $(LIBRARY_INSTALL_PATH) $(INCLUDE_INSTALL_PATH):
 
 .PHONY install: all
 	install -m 0755 $(OUT) $(LIBRARY_INSTALL_PATH)
-	install -m 0644 $(INCLUDE_PATH)/dropbox.h   $(INCLUDE_INSTALL_PATH)
+	install -m 0644 $(INCLUDE_PATH)/dropbox.h $(INCLUDE_INSTALL_PATH)
 
 uninstall: 
-	rm -rf $(LIBRARY_INSTALL_PATH)/libdropbox.a $(INCLUDE_INSTALL_PATH)/dropbox.h
+	rm -rf $(LIBRARY_INSTALL_PATH)/libdropbox.so $(INCLUDE_INSTALL_PATH)/dropbox.h
 
 clean:
 	rm -rf $(OBJ) $(OUT) $(EXAMPLE)
