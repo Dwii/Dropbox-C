@@ -5,7 +5,7 @@ all:
 	cd $(MEM_PATH) && $(MAKE) install
 	cd $(DRB_PATH) && $(MAKE) install
 
-example:
+example: install
 	cd $(DRB_PATH) && $(MAKE) example
 
 .PHONY install: all

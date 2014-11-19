@@ -28,17 +28,16 @@ all: EXPORT_VAR $(OBJ_PATH) $(OUT_PATH) $(LIBRARY_INSTALL_PATH) $(INCLUDE_INSTAL
 example: $(EXAMPLE_PATH)/example
 
 EXPORT_VAR: 
-	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(LD_LIBRARY_PATH)
-	ldconfig
+	-ldconfig $(LIBRARY_INSTALL_PATH)
 
 strip: $(OUT)
 	-strip $^
 
 $(EXAMPLE): $(EXAMPLE_PATH)/example.c
-	$(CC) $(FLAGS) $< -o $@ -Bstatic -lmemstream -Bdynamic -ldropbox -L/usr/local/lib
+	$(CC) $(FLAGS) $< -o $@ -Bstatic -lmemstream -Bdynamic -ldropbox -L$(LIBRARY_INSTALL_PATH)
 
 $(OUT): $(OBJ)
-	$(CC) $(FLAGS) -shared $^ -o $@ -I $(INCLUDE_PATH) -Bstatic -lmemstream -Bdynamic -lcurl -loauth -ljansson -L/usr/local/lib
+	$(CC) $(FLAGS) -shared $^ -o $@ -I $(INCLUDE_PATH) -Bstatic -lmemstream -Bdynamic -lcurl -loauth -ljansson -L$(LIBRARY_INSTALL_PATH)
 
 $(OBJ_PATH)/dropbox.o : $(SRC_PATH)/dropbox.c $(DROPBOX_H)
 	$(CC) $(FLAGS) -o $@ -c $< -I $(INCLUDE_PATH)

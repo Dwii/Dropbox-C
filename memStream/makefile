@@ -19,8 +19,7 @@ OUT=$(OUT_PATH)/libmemstream.a
 all: EXPORT_VAR $(OBJ_PATH) $(OUT_PATH) $(LIBRARY_INSTALL_PATH) $(INCLUDE_INSTALL_PATH) $(OUT)
 
 EXPORT_VAR:
-	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(LD_LIBRARY_PATH)
-	ldconfig
+	-ldconfig $(LIBRARY_INSTALL_PATH)
 
 strip: $(OUT)
 	-strip $^
