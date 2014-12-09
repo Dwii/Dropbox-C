@@ -22,7 +22,7 @@
  * \param   str    string to duplicate
  * \return  duplicated string.
  */
-char* drbStrDup(char* str) {
+char* drbStrDup(const char* str) {
     return str ? strdup(str) : NULL;
 }
 

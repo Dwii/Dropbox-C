@@ -566,7 +566,7 @@ void drbDestroyPollDelta(drbPollDelta* poll) {
     }
 }
 
-drbClient* drbCreateClient(char* cKey, char* cSecret, char* tKey, char* tSecret) {
+drbClient* drbCreateClient(const char* cKey, const char* cSecret, const char* tKey, const char* tSecret) {
     drbClient* cli = NULL;
     if (cKey && cSecret) {
         if((cli = malloc(sizeof(drbClient))) != NULL) {

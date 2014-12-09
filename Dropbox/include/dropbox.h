@@ -266,7 +266,7 @@ void drbCleanup();
  * \param   tSecret   request or access secret (Temporary or Token credentials)
  * \return  drbClient pointer must be freed with drbDestroyClient by caller
  */
-drbClient* drbCreateClient(char* cKey, char* cSecret, char* tKey, char* tSecret);
+drbClient* drbCreateClient(const char* cKey, const char* cSecret, const char* tKey, const char* tSecret);
 
 /*!
  * \brief  Obtain the request token (temporary credentials).

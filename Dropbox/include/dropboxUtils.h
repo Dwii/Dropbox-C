@@ -9,7 +9,7 @@
 #ifndef DROPBOX_UTILS_H
 #define DROPBOX_UTILS_H
 
-char* drbStrDup(char*);
+char* drbStrDup(const char*);
 char* drbGetHeaderFieldContent(const char* field, char* header);
 
 #endif /* DROPBOX_UTILS_H */
