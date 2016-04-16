@@ -12,9 +12,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
-    
+
 #include <stdbool.h>
-    
+#include <stddef.h>
+
 #define DRBVAL_SIZE_XSMALL "xs"
 #define DRBVAL_SIZE_SMALL  "s"
 #define DRBVAL_SIZE_MEDIUM "m"
